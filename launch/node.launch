@@ -1,0 +1,27 @@
+<launch>
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find events_video_dataset_generator)/config/rosconsole.conf"/>
+
+    <!--"Topic where the events will be received from" -->
+    <arg name="events_topic" default="/dvs/events" />
+    
+    <!--"Topic where the images video will be received from" -->   
+    <arg name="video_topic" default="/dvs/reconstructed_image" />
+
+    <!--"Path to the bag file to replay" -->
+    <arg name="bag_path" default="/home/dtejero/test_simulation.bag" />
+
+    <!--"Name of the folder where the dataset will be saved (inside data folder)" -->
+    <arg name="folder_name" default="dataset"/>
+
+    <!-- "Name of the files as prefix"-->
+    <arg name="dataset_name" default="testbed_shelves" />
+
+    <node name="events_video_dataset_generator_node" pkg="events_video_dataset_generator" type="events_video_dataset_generator_node" output="screen">
+        <param name="events_topic"     value="$(arg events_topic)" />
+        <param name="video_topic"      value="$(arg video_topic)" />
+        <param name="bag_path"         value="$(arg bag_path)" />
+        <param name="folder_name"      value="$(arg folder_name)" />
+        <param name="dataset_name"     value="$(arg dataset_name)" />
+    </node>
+
+</launch>
